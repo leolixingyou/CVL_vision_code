@@ -1,0 +1,31 @@
+=========Docker=========
+===Initilize docker===
+docker run --name vision_trt --gpus all -it -v '/home:/home' -v '/bin/bash:/bin/bash' -v '/opt/ros:/opt/ros' -v '/exc:/exc'  -v '/usr/lib:/usr/lib' -v '/usr/share:/usr/share' -v '/etc:/etc' nvcr.io/nvidia/tensorrt:22.12-py3 
+
+===Initialize ros===
+source /opt/ros/noetic/setup.sh
+export ROS_MASTER_URI=http://192.168.101.2:11311
+cd /home/inha/vision/tensorrt-python/
+
+===Install===
+pip install opencv-python
+apt update
+apt install -y libgl1-mesa-glx
+pip install pyYAML
+pip install torch
+pip install torchvision
+
+=== Dowonload ros in docker===
+https://velog.io/@bbirong/Docker-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-ROS-%EC%84%A4%EC%B9%98
+
+apt update
+apt install lsb -y
+
+sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+apt install curl
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
+apt update
+apt install ros-noetic-desktop-full
+
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
